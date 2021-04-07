@@ -3,25 +3,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def median_filter(data, kernel_size):
+def median_filter(J, S =5):
     temp = []
-    indexer = kernel_size // 2
+    indexer = S // 2
     data_final = []
-    data_final = np.zeros((len(data), len(data[0])))
-    for i in range(len(data)):
+    data_final = np.zeros((len(J), len(J[0])))
+    for i in range(len(J)):
 
-        for j in range(len(data[0])):
+        for j in range(len(J[0])):
 
-            for z in range(kernel_size):
-                if i + z - indexer < 0 or i + z - indexer > len(data) - 1:
-                    for c in range(kernel_size):
+            for z in range(S):
+                if i + z - indexer < 0 or i + z - indexer > len(J) - 1:
+                    for c in range(S):
                         temp.append(0)
                 else:
-                    if j + z - indexer < 0 or j + indexer > len(data[0]) - 1:
+                    if j + z - indexer < 0 or j + indexer > len(J[0]) - 1:
                         temp.append(0)
                     else:
-                        for k in range(kernel_size):
-                            temp.append(data[i + z - indexer][j + k - indexer])
+                        for k in range(S):
+                            temp.append(J[i + z - indexer][j + k - indexer])
 
             temp.sort()
             data_final[i][j] = temp[len(temp) // 2]
